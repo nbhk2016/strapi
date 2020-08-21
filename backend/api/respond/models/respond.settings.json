@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "responds",
+  "info": {
+    "name": "Respond"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "publication": {
+      "model": "publication",
+      "via": "responds"
+    },
+    "user": {
+      "via": "responds",
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "description": {
+      "type": "richtext"
+    }
+  }
+}
