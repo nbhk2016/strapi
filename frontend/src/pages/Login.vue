@@ -26,14 +26,14 @@
 			sendAuth(){
 				axios.post('http://localhost:1337/login', this.login)
 					.then(res => {
-						localStorage.setItem('username', response.data.user.username)
-						localStorage.setItem('jwt', response.data.jwt)
+						localStorage.setItem('username', res.data.user.nickname)
+						localStorage.setItem('jwt', res.data.jwt)
 
 						location.href = '/personal/'
-					})
+					})/*
 					.catch(error => {
 						this.loginError = true
-					})
+					})*/
 			}
 		},
 

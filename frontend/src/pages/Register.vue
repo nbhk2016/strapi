@@ -2,7 +2,8 @@
 	<Layout>
 		<div>
 			<h1>Регистрация</h1>
-			<p><input type="text" placeholder="Логин" v-model="reg.identifier"></p>
+			<p><input type="text" placeholder="Логин" v-model="reg.username"></p>
+			<p><input type="text" placeholder="Имя" v-model="reg.name"></p>
 			<p><input type="text" placeholder="Email" v-model="reg.email"></p>
 			<p><input type="password" placeholder="Пароль" v-model="reg.password"></p>
 			<p>
@@ -35,7 +36,8 @@
 	export default {
 		data: () => ({
 			reg: {
-				identifier: null,
+				username: null,
+				name: null,
 				email: null,
 				password: null,
 				role: null,
@@ -47,10 +49,10 @@
 
 		methods: {
 			sendAuth(){
-				axios.post('http://localhost:1337/login', this.reg)
+				axios.post('http://localhost:1337/register', this.reg)
 					.then(res => {
-						localStorage.setItem('username', response.data.user.username)
-						localStorage.setItem('jwt', response.data.jwt)
+						localStorage.setItem('username', res.data.user.nickname)
+						localStorage.setItem('jwt', res.data.jwt)
 
 						location.href = '/personal/'
 					})

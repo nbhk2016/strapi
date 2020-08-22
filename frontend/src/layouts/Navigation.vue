@@ -5,8 +5,10 @@
         <g-link class="nav__link" to="/">Главная</g-link>
         <g-link class="nav__link" to="/publications/">Объявления</g-link>
         <g-link class="nav__link" to="/users/">Пользователи</g-link>
-        <g-link class="nav__link" to="/login/">Вход</g-link>
-        <g-link class="nav__link" to="/register/">Регистрация</g-link>
+        <g-link v-if="!username" class="nav__link" to="/login/">Вход</g-link>
+        <g-link v-if="!username" class="nav__link" to="/register/">Регистрация</g-link>
+        <g-link v-if="username" class="nav__link" to="/personal/">{{username}}</g-link>
+        <a v-if="username" @click.prevent="exit" class="nav__link" href="/">Выход</a>
       </nav>
     </header>
     <slot/>
@@ -20,6 +22,21 @@ query {
   }
 }
 </static-query>
+
+<script>
+  export default {
+    data: () => ({
+      username: localStorage.username
+    }),
+
+    methods: {
+      exit(){
+        localStorage.clear()
+        location.href = '/'
+      }
+    }
+  }
+</script>
 
 <style>
 body {
